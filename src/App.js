@@ -16,7 +16,7 @@ const StyledWrapper = styled(Grid)`
 function App() {
   const [data, setData] = useState([]);
   const [error, setError] = useState(false);
-  console.log(data);
+
   return (
     <DataContext.Provider value={{ data, setData, setError }}>
       <GlobalStyle />
