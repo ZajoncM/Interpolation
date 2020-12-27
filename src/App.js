@@ -1,24 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import { Grid, Snackbar } from '@material-ui/core';
+import Dropzone from './components/Dropzone';
+import DataContext from './context/DataContext';
+import GlobalStyle from './styles/globalStyles';
 
 function App() {
+  const [data, setData] = useState([]);
+  const [error, setError] = useState(false);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <DataContext.Provider value={{ data, setData, setError }}>
+      <GlobalStyle />
+      <Grid item xs={12}>
+        <Dropzone />
+      </Grid>
+      <Snackbar
+        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+        open={error}
+        onClose={() => setError(false)}
+        message="Błędny format danych"
+      />
+    </DataContext.Provider>
   );
 }
 
